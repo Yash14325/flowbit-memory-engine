@@ -1,132 +1,129 @@
-# 🧠 Flowbit — Memory-Driven Invoice Intelligence (Completed)
+🧠 Flowbit – Memory-Driven Invoice Intelligence System
 
-**Status:** ✅ **Completed** — the Memory-Driven Learning Layer has been implemented and tested (TypeScript, Node.js, SQLite).
+Candidate: Dimili Yaswanth
+Role: AI Agent Development Intern – Round 2 Assignment
+Company: Flowbit Private Limited
 
----
+📌 Overview
 
-## 📌 Overview
+This project implements a Memory-Driven Learning Layer for invoice processing systems.
 
-    This project implements a Memory-Driven Learning Layer for invoice processing systems.
+Instead of treating each invoice independently, the system:
 
-    Instead of treating each invoice independently, the system:
+- Remembers vendor-specific patterns
+- Learns from repeated human corrections
+- Applies those learnings to future invoices
+- Maintains full explainability and auditability
 
-        Remembers vendor-specific patterns
+Technology Stack
 
-        Learns from repeated human corrections
-
-        Applies those learnings to future invoices
-
-        Maintains full explainability & auditability
-
-    The solution is built entirely using:
-
-        TypeScript (strict mode)
-
-        Node.js
-
-        SQLite (persistent learned memory)
-
-        No ML training — only explainable heuristics.
+- TypeScript (strict mode)
+- Node.js
+- SQLite (persistent learned memory)
+- No ML training – only explainable heuristics
 
 🧩 Architecture
 
-I   nvoice JSON Input
-            ↓
-    Recall Memory
-            ↓
-    Apply Memory
-            ↓
-    Decide (Auto / Escalate)
-            ↓
-    Learn from Human
-            ↓
-    SQLite Memory Store
+Invoice JSON Input
+        ↓
+   Recall Memory
+        ↓
+   Apply Memory
+        ↓
+   Decide (Auto / Escalate)
+        ↓
+   Learn from Human
+        ↓
+   SQLite Memory Store
 
 🧠 Memory Types
 
 
-    1️⃣ VendorMemory
+1️⃣ VendorMemory
 
-    Stores vendor-specific patterns:
+Stores vendor-specific patterns.
 
-    Vendor	            Learned Pattern
-    Supplier GmbH	    Leistungsdatum → serviceDate
-    Parts AG	        VAT included detection
-    Freight & Co	    “Seefracht / Shipping” → SKU FREIGHT
-    Parts AG	        Recover missing currency from rawText
+Vendor	Learned Pattern
+Supplier GmbH	Leistungsdatum → serviceDate
+Parts AG	VAT included detection
+Freight & Co	Seefracht / Shipping → SKU FREIGHT
+Parts AG	Recover missing currency from rawText
 
-    2️⃣ CorrectionMemory
+2️⃣ CorrectionMemory
 
-    Learns repeated correction strategies:
+Learns repeated correction strategies.
 
-    Quantity mismatch → Trust Delivery Note qty
+Quantity mismatch → Trust Delivery Note quantity
 
-    VAT included → Recalculate net/tax/gross
+VAT included → Recalculate net / tax / gross
 
-    Description → SKU mapping
+Description → SKU mapping
 
-    3️⃣ ResolutionMemory
+3️⃣ ResolutionMemory
 
-T   Tracks outcome of suggestions:
+Tracks outcomes of suggestions.
 
-    Action	Effect
-    Human Approved	+0.1 confidence
-    Human Rejected	-0.05 confidence
+Action	Effect
+Human Approved	+0.1 confidence
+Human Rejected	−0.05 confidence
 
-    This prevents bad memory from dominating.
+This prevents bad memory from dominating.
 
 
 ⚙ Decision Logic
-R   ule	Behavior
-    Confidence < 0.65	Escalate to human
-    Duplicate detected	Flag invoice
-    High confidence memory	Auto-correct
-    Conflicting memory	Escalate
 
+Rule	Behavior
+Confidence < 0.65	Escalate to human
+Duplicate detected	Flag invoice
+High confidence memory	Auto-correct
+Conflicting memory	Escalate
 
 📤 Output Contract
 
-    Each invoice returns:
+Each invoice returns:
 
-    {
-    "normalizedInvoice": {},
-    "proposedCorrections": [],
-    "requiresHumanReview": true,
-    "reasoning": "",
-    "confidenceScore": 0.0,
-    "memoryUpdates": [],
-    "auditTrail": []
-    }
+{
+  "normalizedInvoice": {},
+  "proposedCorrections": [],
+  "requiresHumanReview": true,
+  "reasoning": "",
+  "confidenceScore": 0.0,
+  "memoryUpdates": [],
+  "auditTrail": []
+}
 
-🎬 Demo & Usage ✅
+🎬 Demo & Usage
 
-1. Install dependencies:
+Install dependencies
 
 ```bash
 npm install
 ```
 
-2. Run the demo:
+Run demo
 
 ```bash
 npm run demo
 ```
 
-Expected behavior (demo):
+Expected behavior
 
-- `INV-A-001`: Missing `serviceDate` → escalated → learns vendor-specific pattern
-- `INV-A-002`: `serviceDate` auto-filled → no human review
+INV-A-001 → Missing serviceDate → escalated → learns vendor pattern
 
-This demonstrates persistent learning across runs (memory stored in `memory.db`).
+INV-A-002 → serviceDate auto-filled → no human review
+
+This demonstrates persistent learning across runs (memory.db).
+
+
 
 🗄 Persistence
 
-Memory is stored in:
+All learned memory is stored in:
 
-    memory.db (SQLite)
+memory.db (SQLite)
 
 
-All vendor patterns and corrections survive application restarts.
+Patterns survive application restarts.
 
 
 🛡 Why This Prevents Hallucination Memory
@@ -140,31 +137,15 @@ Duplicate invoices never create memory
 All actions are logged in auditTrail
 
 
----
+🔧 Troubleshooting
 
-## 🔧 Quick Troubleshooting
+Ensure npm install completed successfully
 
-- If the demo hangs, ensure `npm install` completed and Node is up-to-date.
-- To reset learned memories, remove `memory.db` (this deletes persisted knowledge).
+Delete memory.db to reset learned memory
 
----
 
-## 📤 Pushing this change to GitHub
+👤 Author
 
-If you'd like me to push this update, I can run the git commands for you (requires your repo auth). Otherwise, run these locally:
-
-```bash
-git add README.md
-git commit -m "docs: update README — project completed and add push instructions"
-# replace `main` with your branch name if different
-git push origin main
-```
-
----
-
-## 👤 Author
-
-Dimili Yaswanth — Flowbit Private Limited
-
----
+Dimili Yaswanth
+Flowbit Private Limited
 
