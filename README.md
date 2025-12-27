@@ -4,6 +4,7 @@ Candidate: Dimili Yaswanth
 Role: AI Agent Development Intern – Round-2 Assignment
 Company: Flowbit Private Limited
 
+
 📌 Overview
 
 This project implements a Memory-Driven Learning Layer for invoice processing systems.
@@ -28,6 +29,7 @@ SQLite (persistent learned memory)
 
 No ML training – only explainable heuristics
 
+
 🧩 Architecture
 Invoice JSON Input
         ↓
@@ -41,7 +43,10 @@ Invoice JSON Input
         ↓
    SQLite Memory Store
 
+
+
 🧠 Memory Types
+
 1️⃣ VendorMemory
 
 Stores vendor-specific patterns.
@@ -51,6 +56,7 @@ Supplier GmbH	Leistungsdatum → serviceDate
 Parts AG	VAT included detection
 Freight & Co	Seefracht / Shipping → SKU FREIGHT
 Parts AG	Recover missing currency from rawText
+
 2️⃣ CorrectionMemory
 
 Learns repeated correction strategies.
@@ -77,8 +83,9 @@ Confidence < 0.65	Escalate to human
 Duplicate detected	Flag invoice
 High-confidence memory	Auto-correct
 Conflicting memory	Escalate
-📤 Output Contract
 
+
+📤 Output Contract
 Each invoice returns:
 
 {
@@ -91,12 +98,15 @@ Each invoice returns:
   "auditTrail": []
 }
 
+
 🎬 Demo & Usage
+
 Install dependencies
 npm install
 
 Run demo
 npm run demo
+
 
 Expected behavior
 
@@ -106,6 +116,7 @@ INV-A-002 → serviceDate auto-filled → no human review
 
 This demonstrates persistent learning across runs using memory.db.
 
+
 🗄 Persistence
 
 All learned memory is stored in:
@@ -114,6 +125,7 @@ memory.db (SQLite)
 
 
 Patterns survive application restarts.
+
 
 🛡 Why This Prevents Hallucination Memory
 
@@ -125,11 +137,13 @@ Duplicate invoices never create memory
 
 All actions are logged in auditTrail
 
+
 🔧 Troubleshooting
 
 Ensure npm install completes successfully
 
 Delete memory.db to reset learned memory
+
 
 👤 Author
 
