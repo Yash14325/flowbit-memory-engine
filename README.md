@@ -1,10 +1,10 @@
-🧠 Flowbit Memory-Driven Invoice Intelligence System :
+# 🧠 Flowbit — Memory-Driven Invoice Intelligence (Completed)
 
-    Candidate: Dimili Yaswanth
-    Role: AI Agent Development Intern – Round 2 Assignment
-    Company: Flowbit Private Limited
+**Status:** ✅ **Completed** — the Memory-Driven Learning Layer has been implemented and tested (TypeScript, Node.js, SQLite).
 
-📌 Overview
+---
+
+## 📌 Overview
 
     This project implements a Memory-Driven Learning Layer for invoice processing systems.
 
@@ -98,21 +98,26 @@ R   ule	Behavior
     "auditTrail": []
     }
 
-🎬 Demo — Learning Over Time
+🎬 Demo & Usage ✅
 
+1. Install dependencies:
 
-        Run Demo
-        npm install
-        npm run demo
+```bash
+npm install
+```
 
+2. Run the demo:
 
-Expected Behavior
-    Invoice	    Result
+```bash
+npm run demo
+```
 
-    INV-A-001	Missing serviceDate → Escalated → Learns Leistungsdatum
-    INV-A-002	serviceDate auto-filled → No human review
+Expected behavior (demo):
 
-This proves persistent learning across runs.
+- `INV-A-001`: Missing `serviceDate` → escalated → learns vendor-specific pattern
+- `INV-A-002`: `serviceDate` auto-filled → no human review
+
+This demonstrates persistent learning across runs (memory stored in `memory.db`).
 
 🗄 Persistence
 
@@ -135,14 +140,31 @@ Duplicate invoices never create memory
 All actions are logged in auditTrail
 
 
-🏁 Conclusion
+---
 
-This system simulates a real-world intelligent invoice agent that:
+## 🔧 Quick Troubleshooting
 
-Learns continuously
+- If the demo hangs, ensure `npm install` completed and Node is up-to-date.
+- To reset learned memories, remove `memory.db` (this deletes persisted knowledge).
 
-Reduces human workload
+---
 
-Remains fully explainable
+## 📤 Pushing this change to GitHub
 
-Never blindly applies memory
+If you'd like me to push this update, I can run the git commands for you (requires your repo auth). Otherwise, run these locally:
+
+```bash
+git add README.md
+git commit -m "docs: update README — project completed and add push instructions"
+# replace `main` with your branch name if different
+git push origin main
+```
+
+---
+
+## 👤 Author
+
+Dimili Yaswanth — Flowbit Private Limited
+
+---
+

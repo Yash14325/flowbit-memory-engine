@@ -30,5 +30,23 @@ function run(invoice: any) {
   }, null, 2));
 }
 
-run(invoices[0]);
-run(invoices[1]);
+const ids = [
+  "INV-A-001",
+  "INV-A-002",
+  "INV-A-003",
+  "INV-B-001",
+  "INV-B-003",
+  "INV-C-001",
+  "INV-C-002",
+  "INV-A-004",
+  "INV-B-004"
+];
+
+for (const id of ids) {
+  const inv = invoices.find((i: any) => i.invoiceId === id);
+  if (!inv) {
+    console.log(`⚠ Skipping ${id} – not found in dataset`);
+    continue;
+  }
+  run(inv);
+}
