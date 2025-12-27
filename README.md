@@ -1,6 +1,6 @@
-🧠 Flowbit – Memory-Driven Invoice Intelligence System
+# 🧠 Flowbit — Memory-Driven Invoice Intelligence System
 
-Candidate: Dimili Yaswanth
+**Candidate:** Dimili Yaswanth  •  **Role:** AI Agent Development Intern – Round 2 Assignment  •  **Company:** Flowbit Private Limited
 Role: AI Agent Development Intern – Round-2 Assignment
 Company: Flowbit Private Limited
 
@@ -19,75 +19,74 @@ Applies those learnings to future invoices
 
 Maintains full explainability and auditability
 
-Technology Stack
+### Technology Stack
 
-TypeScript (strict mode)
-
-Node.js
-
-SQLite (persistent learned memory)
-
-No ML training – only explainable heuristics
+- **TypeScript** (strict mode)
+- **Node.js**
+- **SQLite** (persistent learned memory)
+- No ML training — only explainable heuristics
 
 
-🧩 Architecture
-Invoice JSON Input
-        ↓
-   Recall Memory
-        ↓
-   Apply Memory
-        ↓
-   Decide (Auto / Escalate)
-        ↓
-   Learn from Human
-        ↓
-   SQLite Memory Store
+---
+
+## 🧩 Architecture
+
+Invoice JSON Input → Recall Memory → Apply Memory → Decide (Auto / Escalate) → Learn from Human → SQLite Memory Store
+
+---
 
 
+## 🧠 Memory Types
 
-🧠 Memory Types
-
-1️⃣ VendorMemory
+### 1️⃣ VendorMemory
 
 Stores vendor-specific patterns.
 
-Vendor	Learned Pattern
-Supplier GmbH	Leistungsdatum → serviceDate
-Parts AG	VAT included detection
-Freight & Co	Seefracht / Shipping → SKU FREIGHT
-Parts AG	Recover missing currency from rawText
+| Vendor | Learned Pattern |
+|---|---|
+| Supplier GmbH | Leistungsdatum → `serviceDate` |
+| Parts AG | VAT included detection |
+| Freight & Co | Seefracht / Shipping → SKU `FREIGHT` |
+| Parts AG | Recover missing currency from `rawText` |
 
-2️⃣ CorrectionMemory
+### 2️⃣ CorrectionMemory
 
 Learns repeated correction strategies.
 
-Quantity mismatch → Trust Delivery Note quantity
+- Quantity mismatch → Trust Delivery Note quantity
+- VAT included → Recalculate net / tax / gross
+- Description → SKU mapping
 
-VAT included → Recalculate net / tax / gross
-
-Description → SKU mapping
-
-3️⃣ ResolutionMemory
+### 3️⃣ ResolutionMemory
 
 Tracks outcomes of suggestions.
 
-Action	Effect
-Human Approved	+0.1 confidence
-Human Rejected	−0.05 confidence
+| Action | Effect |
+|---|---|
+| Human Approved | +0.1 confidence |
+| Human Rejected | −0.05 confidence |
 
 This prevents bad memory from dominating.
 
-⚙ Decision Logic
-Rule	Behavior
-Confidence < 0.65	Escalate to human
-Duplicate detected	Flag invoice
-High-confidence memory	Auto-correct
-Conflicting memory	Escalate
+---
+
+## ⚙ Decision Logic
+
+| Rule | Behavior |
+|---|---|
+| Confidence < 0.65 | Escalate to human |
+| Duplicate detected | Flag invoice |
+| High confidence memory | Auto-correct |
+| Conflicting memory | Escalate |
+
+---
 
 
-📤 Output Contract
+## 📤 Output Contract
+
 Each invoice returns:
 
+```json
 {
   "normalizedInvoice": {},
   "proposedCorrections": [],
@@ -97,55 +96,59 @@ Each invoice returns:
   "memoryUpdates": [],
   "auditTrail": []
 }
+```
 
 
-🎬 Demo & Usage
+---
 
-Install dependencies
+## 🎬 Demo & Usage
+
+1. Install dependencies:
+
+```bash
 npm install
+```
 
-Run demo
+2. Run the demo:
+
+```bash
 npm run demo
+```
+
+**Expected behavior (demo):**
+
+- `INV-A-001` → Missing `serviceDate` → escalated → learns vendor pattern
+- `INV-A-002` → `serviceDate` auto-filled → no human review
+
+This demonstrates persistent learning across runs (`memory.db`).
+
+---
 
 
-Expected behavior
+## 🗄 Persistence
 
-INV-A-001 → Missing serviceDate → escalated → learns vendor pattern
+All learned memory is stored in `memory.db` (SQLite). Patterns survive application restarts.
 
-INV-A-002 → serviceDate auto-filled → no human review
+---
 
-This demonstrates persistent learning across runs using memory.db.
+## 🛡 Why This Prevents Hallucination Memory
 
+- Memory is reinforced only after human approval
+- Low-confidence patterns decay automatically
+- Duplicate invoices never create memory
+- All actions recorded in `auditTrail`
 
-🗄 Persistence
+---
 
-All learned memory is stored in:
+## 🔧 Troubleshooting
 
-memory.db (SQLite)
+- Ensure `npm install` completed successfully
+- Delete `memory.db` to reset learned memory (deletes persisted data)
 
+---
 
-Patterns survive application restarts.
+## 👤 Author
 
+Dimili Yaswanth — Flowbit Private Limited
 
-🛡 Why This Prevents Hallucination Memory
-
-Memory reinforced only after human approval
-
-Low-confidence patterns decay automatically
-
-Duplicate invoices never create memory
-
-All actions are logged in auditTrail
-
-
-🔧 Troubleshooting
-
-Ensure npm install completes successfully
-
-Delete memory.db to reset learned memory
-
-
-👤 Author
-
-Dimili Yaswanth
-Flowbit Private Limited
+---
