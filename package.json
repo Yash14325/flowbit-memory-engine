@@ -1,0 +1,15 @@
+{
+  "name": "flowbit-memory-engine",
+  "version": "1.0.0",
+  "scripts": {
+    "demo": "ts-node demoRunner.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
